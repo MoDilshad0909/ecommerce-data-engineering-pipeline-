@@ -7,6 +7,24 @@ This project is a complete data engineering pipeline built to extract, transform
 
 Data Sources -> Python ETL -> Staging -> Data Warehouse -> Power BI
 
+## Project Workflow
+
+```text
+Raw CSV
+     ↓
+Extract
+     ↓
+Validation
+     ↓
+Transformation
+     ↓
+Processed CSV
+```
+
+### ETL Pipeline Explanation
+- **Extract**: We read all the raw CSV files automatically from `data/raw/` using Pandas, while logging metadata and handling encoding errors gracefully.
+- **Validation**: Before performing any destructive changes, we validate the DataFrames to identify missing values, duplicate counts, null percentages, and data types.
+- **Transformation**: We clean the data by dropping empty records, removing duplicates, standardizing column names to `snake_case`, stripping text whitespaces, converting strings to datetime, and finally saving the output to `data/processed/`.
 ## Repository Structure
 - `data/`: Local storage for raw and processed datasets (Ignored by Git).
 - `sql/`: DDL, DML, and Ad-Hoc SQL queries for the PostgreSQL database.
